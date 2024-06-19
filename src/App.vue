@@ -1,14 +1,14 @@
-<script>
-
-  export default {
-   
-  }
+<script setup>
+  import Navbar from "./components/Navbar.vue"
 </script>
 
 
 <template>
-<main>
-  <router-view></router-view>
-</main>
+<v-app>
+    <Navbar/>
+  <v-main>
+    <router-view></router-view>
+  </v-main>
+</v-app>
 </template>
 
