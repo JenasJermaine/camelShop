@@ -1,5 +1,7 @@
 <template>
     <h1>Confectionery</h1>
+    <v-btn to="/ManageProducts" style="color: yellow; background-color: #F0F;">ManageProducts</v-btn>
+
     <div>
         <v-row>
             <v-col cols="12" md="3"  v-for="product in stock" :key=product>
@@ -9,20 +11,20 @@
     >
         <v-img
         height="250"
-        :src="product.itemImage"
+        :src="product.productImagePath"
         cover
         ></v-img>
 
         <v-card-item>
-        <v-card-title>{{ product.itemName }}</v-card-title>
+        <v-card-title>{{ product.productName }}</v-card-title>
         </v-card-item>
 
         <v-card-text>
         <div class="my-4 text-subtitle-1">
-            {{ product.itemPrice }}
+            {{ product.productPrice }}
         </div>
 
-        <div>{{ product.description }}</div>
+        <div>{{ product.productDescription }}</div>
         </v-card-text>
 
         <v-divider class="mx-4 mb-1"></v-divider>
@@ -42,137 +44,28 @@
     </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex'
 
-export default{
-    data(){
-        return{
-            products:[1,2,3,4,5,6,7,8,9,10],
-            stockDetails : [
-            {
-                itemNumber: 27466,
-                itemName : "Snickers",
-                itemPrice : 120,
-                itemQuantity : 4,
-                itemImage: 'public/images/Snickers.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
+    export default {
+        data(){
+            return{
+               
             }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "Reese's",
-                itemPrice : 100,
-                itemQuantity : 4,
-                itemImage: 'public/images/Reeses.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "m & m's",
-                itemPrice : 150,
-                itemQuantity : 4,
-                itemImage: 'public/images/M and M.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            },
-            {
-                itemNumber: 27466,
-                itemName : "Brats",
-                itemPrice : 130,
-                itemQuantity : 4,
-                itemImage: 'public/images/Brats.png',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "mars",
-                itemPrice : 160,
-                itemQuantity : 4,
-                itemImage: 'public/images/Mars bar.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 1,
-                itemName : "Gummy bears",
-                itemPrice : 5,
-                itemQuantity : 30,
-                itemImage: 'public/images/Gummy bear.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-            },
-            {
-                itemNumber: 27466,
-                itemName : "Tropical sweets",
-                itemPrice : 2,
-                itemQuantity : 4,
-                itemImage: 'public/images/Tropical sweets.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "Chocolate",
-                itemPrice : 80,
-                itemQuantity : 4,
-                itemImage: 'public/images/Cadbury chocolate.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "Skittles",
-                itemPrice : 80,
-                itemQuantity : 4,
-                itemImage: 'public/images/Skittles.jpeg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-            ,
-            {
-                itemNumber: 27466,
-                itemName : "Lollipop",
-                itemPrice : 10,
-                itemQuantity : 4,
-                itemImage: '../images/jamie-albright-AHF_ZktTL6Q-unsplash.jpg',
-                description: "Our sweets are wonderfully crafted by the best ingrdients to bring deliciousness to your parties"
-
-            }
-        ],
-        total:0,
-
-        cartItems:[],
-        }
-    },
-
-    methods:{
-        calculateTotal(itemPrice){
-            this.total+= itemPrice
+        },
+        methods:{
+            ...mapActions([
+                "addToCart",
+                "fetchProducts" // action to trigger fetching products from api
+            ])
 
         },
-        addToCart(product){
-            this.cartItems.push(product)
-            this.calculateTotal(product.itemPrice)
-
+        computed: {
+            ...mapGetters({
+                stock: 'stock'
+            })
         },
-        removeFromCart(product){
-            this.cartItems.pop(product)
-            this.total -= product.itemPrice
+        created() {
+            this.fetchProducts() // retrieve the products when the component is called
         }
-
-    },
-    computed: {
-        ... mapGetters({
-            stock: 'stock'
-            
-        })
     }
-}
 </script>

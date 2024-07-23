@@ -6,6 +6,8 @@ import AboutUs from "./../components/AboutUs.vue"
 import ContactUs from "./../components/ContactUs.vue"
 import Cart from "./../components/Cart.vue"
 import ServicesOffered from "./../components/ServicesOffered.vue"
+import ManageProducts from "./../components/ManageProducts.vue"
+
 const routes = [
     {
       path: '/',
@@ -36,6 +38,11 @@ const routes = [
         path: '/ServicesOffered',
         name: 'ServicesOffered',
         component: ServicesOffered,
+      },
+      {
+        path: '/ManageProducts',
+        name: 'ManageProducts',
+        component: ManageProducts,
       },
 ]
 const router = createRouter({

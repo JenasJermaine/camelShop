@@ -53,22 +53,23 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex'
+    export default {
+        data(){
+            return{
 
-export default {
-    
-    data(){
-        return{
-
+            }
+        },
+        methods: {
+            ...mapActions([
+                'removeFromCart'
+            ])
+        },
+        computed: {
+            ...mapGetters({
+                cartItems: 'cart',
+                total: 'totalCartAmount'
+            })
         }
-    },
-    methods: {
-        
-    },
-    computed: {
-        ...mapGetters({
-            cartItems: 'cart'
-        })
     }
-}
 </script>

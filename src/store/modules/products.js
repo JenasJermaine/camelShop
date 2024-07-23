@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const state ={
     stockDetails : [
         {
@@ -97,15 +99,32 @@ const state ={
 
         }
     ],
+    allProducts:[]
 }
 const getters={
-    stock: (state) => state.stockDetails,
+    stock: (state) => state.allProducts,
     
 }
 const actions ={
+    async fetchProducts({commit}){
+        try{
+                   const data = await axios.get(
+                    "http://127.0.0.1:8000/api/products"
+        );
+        commit ("SET_PRODUCTS", data.data);
+ 
+        } catch(error){
+            alert(error);
+            console.log(error);
+        }
+
+    },
     
 }
 const mutations ={
+    SET_PRODUCTS (state, allProducts){
+        state.allProducts= allProducts
+    }
     
 }
 export default{
