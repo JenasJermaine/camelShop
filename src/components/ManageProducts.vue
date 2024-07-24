@@ -100,7 +100,7 @@
             save(){
                 try {
                     axios
-                    .post('https://camelshop-dy66.onrender.com/api/products', this.newProduct)
+                    .post('https://candy-back.onrender.com/api/products', this.newProduct)
                     .then((response) => console.log(response))
                     this.fetchProducts()
                     this.add_dialog = false
